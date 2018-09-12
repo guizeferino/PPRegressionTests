@@ -2,7 +2,7 @@
 <suite name="Suite PP">
 	<test name = "Teste PP">
 	<classes>
-			<class name = "PPRegressionTests.dao.DataBaseTesting"></class>
-		</classes>
+			<class name = "PPRegressionTests.tests.CadastroPessoaTest"></class>
+	</classes>
 	</test>
 </suite>

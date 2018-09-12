@@ -138,7 +138,6 @@ public class Util {
 	}
 
 	public void gravarArquivo(String path, Properties prop) {
-		// "/home/daiane/workspace2/PPRegressionTests/src/test/resources/files/dadosPessoaFisicaCorretora.properties"
 
 		try {
 			URL resourceUrl = getClass().getResource(path);

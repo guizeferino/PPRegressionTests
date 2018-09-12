@@ -34,11 +34,6 @@ public class Base {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
-	@AfterMethod
-	public void returnToHomePage() {
-		
-	}
 
 	@AfterTest
 	public void teardown() {
