@@ -1,12 +1,6 @@
 package PPRegressionTests.tests;
-
-import java.io.IOException;
-import java.sql.SQLException;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import PPRegressionTests.base.Base;
@@ -39,41 +33,16 @@ public class CadastroPessoaTest extends Base{
 	}
 
 	@Test
-	public void cadastraPessoaFisicaCorretora() throws SQLException, IOException, InterruptedException {
+	public void cadastraPessoaFisicaCorretora() {
 		
 		login.logarNoSocc();
 		home.selecionaPerfil("Administrador Corretora");
 		menu.acessaTelaCadastroPessoaFisicaCorretora();
 		consultaPF.cliqueEmAdicionarPessoaFisicaCorretora();
 		cadastraPF.insereDadosPessoaFisicaCorretora();
-
-//
-//		Select dropdownJustificativa = new Select(driver.findElement(By.id("justificativaPadraoDePendencia")));
-//		dropdownJustificativa.selectByValue("4");
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		driver.findElement(By.id("salvarPendencias")).click();
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		/*
-		 * Select dropdoswnProfissao = new
-		 * Select(driver.findElement(By.linkText("cbxPerfilUsuarioLogado")));
-		 * dropdownPerfil.selectByVisibleText("Administrador Corretora");
-		 */
-
-		// geraCPF();
-		// conectarBancoTeste();
-
+		assertThat(util.RgJaCadastrado()).isTrue();
+		assertThat(util.CpfJaCadastrado()).isTrue();
+		
 	}
-
+	
 }

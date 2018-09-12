@@ -1,5 +1,6 @@
 package PPRegressionTests.pages.pessoa;
 
+import java.io.FileOutputStream;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -64,7 +65,15 @@ public class CadastroPessoaFisicaCorretoraGeralPage {
 	}
 
 	private void digitaCPF() {
-		txtCPF.sendKeys(util.geraCPF());
+		String CPF = util.geraCPF();
+		txtCPF.sendKeys(CPF);
+		try{
+			pessoaFisica.setProperty("CPF", CPF);
+			util.gravarArquivo("files/dadosPessoaFisicaCorretora.properties", pessoaFisica);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	private void digitaNome() {
@@ -72,7 +81,16 @@ public class CadastroPessoaFisicaCorretoraGeralPage {
 	}
 
 	private void digitarRG() {
-		txtRG.sendKeys(util.geraRG());
+		String RG = util.geraRG();
+		txtRG.sendKeys(RG);
+		try{
+			
+			pessoaFisica.setProperty("RG", RG);
+			util.gravarArquivo("files/dadosPessoaFisicaCorretora.properties", pessoaFisica);
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
 	}
 
 	private void digitarOrgaoEmissor() {
@@ -85,9 +103,6 @@ public class CadastroPessoaFisicaCorretoraGeralPage {
 		executor.executeScript("arguments[0].click();", lnkPopupSelecionarIndicacao);
 		executor.executeScript("arguments[0].click();", checkPadraoConfidence);
 		executor.executeScript("arguments[0].click();", btnConfirmarSelecaoIndicacao);
-		
-		
-		//util.waitUntilElementTobeInvisible("//div[@class='dxDialog dxInfoDialog']", wait, driver);
 	}
 
 	private void digitaCelular() {

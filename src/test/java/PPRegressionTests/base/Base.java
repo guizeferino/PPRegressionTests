@@ -24,7 +24,7 @@ public class Base {
 	@BeforeTest
 	public void setUp() {
 		baseUrl = "http://10.90.0.63:8080/confidence/index.html";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(baseUrl);
 		System.out.println("ROdando BEFORE Test");

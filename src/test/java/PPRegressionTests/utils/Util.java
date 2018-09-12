@@ -1,9 +1,11 @@
 package PPRegressionTests.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,16 +17,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Util {
 
-	public String geraCPF(){
+	public String geraCPF() {
 		String numero = "";
 
-		if(CpfJaCadastrado() == true) {
+		if (CpfJaCadastrado() == true) {
 			Random rand = new Random();
 			int n = 10;
 			int n1 = rand.nextInt(n);
@@ -46,8 +47,7 @@ public class Util {
 				d2 = 0;
 
 			numero = "" + n1 + n2 + n3 + "." + n4 + n5 + n6 + "." + n7 + n8 + n9 + "-" + d1 + d2;
-		}
-		else {
+		} else {
 			numero = "41844043835";
 		}
 		return numero;
@@ -55,13 +55,12 @@ public class Util {
 
 	public String geraRG() {
 		String numero = "";
-		if(RgJaCadastrado() == true) {
+		if (RgJaCadastrado() == true) {
 			Random rand = new Random();
 			int n = 100000000 + rand.nextInt(900000000);
 			numero = Integer.toString(n);
 			System.out.println(numero);
-		}
-		else {
+		} else {
 			numero = "486028264";
 		}
 		return numero;
@@ -74,23 +73,23 @@ public class Util {
 		try {
 			conn = conexao.conectarBancoTeste();
 			Properties prop = new Properties();
-			lerArquivo("src/test/java/PPRegressionTests.files.documentos.properties", prop);
-			String rg =  prop.getProperty("RG");
+			lerArquivo("src/test/java/PPRegressionTests.files.dadosPessoaFisicaCorretora.properties", prop);
+			String rg = prop.getProperty("RG");
 
-				String sql = "SELECT count(*) as resultados FROM Documento where numeroSemFormato = '" + rg + "'";
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();
+			String sql = "SELECT count(*) as resultados FROM Documento where numeroSemFormato = '" + rg + "'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-				while (rs.next()) {
-					int resultados = rs.getInt("resultados");
-					if (resultados == 0)
-						rgJaExisteNaBase = false;
-				}
-				conn.close();
-				if (conn.isClosed()) {
-					System.out.println("fechou");
-				}
-			
+			while (rs.next()) {
+				int resultados = rs.getInt("resultados");
+				if (resultados == 0)
+					rgJaExisteNaBase = false;
+			}
+			conn.close();
+			if (conn.isClosed()) {
+				System.out.println("fechou");
+			}
+
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -103,19 +102,18 @@ public class Util {
 		boolean cpfJaExisteNaBase = true;
 		try {
 			Properties prop = new Properties();
-			lerArquivo("src/test/java/PPRegressionTests.files.documentos.properties", prop);
-			String cpf =  prop.getProperty("CPF");
+			lerArquivo("src/test/java/PPRegressionTests.files.dadosPessoaFisicaCorretora.properties", prop);
+			String cpf = prop.getProperty("CPF");
 			conn = conexao.conectarBancoTeste();
-			
-				String sql = "SELECT count(*) as resultados FROM Documento where numeroSemFormato = '" + cpf + "'";
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();
-				while (rs.next()) {
-					int resultados = rs.getInt("resultados");
-					if (resultados == 0)
-						cpfJaExisteNaBase = false;
-				}
-	
+
+			String sql = "SELECT count(*) as resultados FROM Documento where numero = '" + cpf + "'";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int resultados = rs.getInt("resultados");
+				if (resultados == 0)
+					cpfJaExisteNaBase = false;
+			}
 
 			conn.close();
 			if (conn.isClosed()) {
@@ -126,43 +124,58 @@ public class Util {
 		}
 		return cpfJaExisteNaBase;
 	}
-	
-	public void lerArquivo(String path, Properties prop){
-		
+
+	public void lerArquivo(String path, Properties prop) {
+
 		InputStream fs;
 		try {
 			fs = getClass().getClassLoader().getResourceAsStream(path);
 			prop.load(fs);
+			fs.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void waitUntilElementTobeClickAble(WebElement e, WebDriverWait wait, WebDriver driver){
+	public void gravarArquivo(String path, Properties prop) {
+		// "/home/daiane/workspace2/PPRegressionTests/src/test/resources/files/dadosPessoaFisicaCorretora.properties"
+
+		try {
+			URL resourceUrl = getClass().getResource(path);
+			File file = new File(resourceUrl.toURI());
+			OutputStream output = new FileOutputStream(file);
+			prop.store(output, null);
+			output.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void waitUntilElementTobeClickAble(WebElement e, WebDriverWait wait, WebDriver driver) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(e));
 	}
-	
-	public void waitVisibilityOfElement(WebElement e, WebDriverWait wait, WebDriver driver){
+
+	public void waitVisibilityOfElement(WebElement e, WebDriverWait wait, WebDriver driver) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(e));
 	}
-	
-	public void waitVisibilityOfListOfElements(List<WebElement> e, WebDriverWait wait, WebDriver driver){
+
+	public void waitVisibilityOfListOfElements(List<WebElement> e, WebDriverWait wait, WebDriver driver) {
 		wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>)e));
+		wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>) e));
 	}
 
-	public void waitUntilElementTobeInvisible(String e, WebDriverWait wait, WebDriver driver){
+	public void waitUntilElementTobeInvisible(String e, WebDriverWait wait, WebDriver driver) {
 		wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(e)));
 	}
-	
-	public void scrollTillElement(WebDriver driver,WebElement e) {
+
+	public void scrollTillElement(WebDriver driver, WebElement e) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("javascript:window.scrollBy(" + e.getLocation().x + "," + e.getLocation().y + ")");
 		e.click();
 	}
-	
-	
+
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -29,8 +30,12 @@ public class CadastroPessoaFisicaCorretoraTipoPage {
 	}
 
 	private void irParaAbaTipo() {
-		util.waitUntilElementTobeClickAble(abaTipoTitular, wait, driver);
-		abaTipoTitular.click();
+		wait = new WebDriverWait(driver, 5);
+		boolean invisible = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='holyLoadingShow']")));
+		if(invisible) {
+			abaTipoTitular.click();
+		}
+		
 	}
 	
 	public List<WebElement> getTipoClienteCorretora() {
@@ -43,7 +48,7 @@ public class CadastroPessoaFisicaCorretoraTipoPage {
 
 	}
 	
-	private void selecionaTipoClienteCorretora() throws InterruptedException {
+	private void selecionaTipoClienteCorretora(){
 		List<WebElement> list = getTipoClienteCorretora();
 		util.waitVisibilityOfListOfElements(list, wait, driver);
 		for (int i = 1; i <= list.size(); i++) {
@@ -59,7 +64,7 @@ public class CadastroPessoaFisicaCorretoraTipoPage {
 		}
 	}
 
-	public void insereDadosPessoaFisicaCorretoraTipo() throws InterruptedException {
+	public void insereDadosPessoaFisicaCorretoraTipo(){
 		irParaAbaTipo();
 		selecionaTipoClienteCorretora();
 	}

@@ -22,17 +22,18 @@ public class CadastroPessoaFisicaCorretoraPage {
 	CadastroPessoaFisicaCorretoraGeralPage CPFGeral;
 	CadastroPessoaFisicaCorretoraTipoPage CPFTipo;
 	CadastroPessoaFisicaCorretoraEnderecoPage CPFEndereco;
+	CadastroPessoaFisicaDocumentoPage CPFDocumento;
 	
 	public CadastroPessoaFisicaCorretoraPage(WebDriver driver) {
 		CPFGeral = new CadastroPessoaFisicaCorretoraGeralPage(driver);
 		CPFTipo = new CadastroPessoaFisicaCorretoraTipoPage(driver);
 		CPFEndereco = new CadastroPessoaFisicaCorretoraEnderecoPage(driver);
+		CPFDocumento = new CadastroPessoaFisicaDocumentoPage(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	
 	private void salvarCadastroPessoaFisicaCorretora() {
-		
 		wait = new WebDriverWait(driver, 5);
 		boolean invisible = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='holyLoadingShow']")));
 		if(invisible) {
@@ -41,12 +42,14 @@ public class CadastroPessoaFisicaCorretoraPage {
 
 	}
 	
-	public void insereDadosPessoaFisicaCorretora() throws InterruptedException{
+	public void insereDadosPessoaFisicaCorretora(){
 	
 		CPFGeral.insereDadosPessoaFisicaCorretoraGeral();
 		CPFTipo.insereDadosPessoaFisicaCorretoraTipo();
 		CPFEndereco.insereDadosPessoaFisicaCorretoraEndereco();
+		CPFDocumento.insereDadosPessoaFisicaCorretoraDocumentos();
 		salvarCadastroPessoaFisicaCorretora();
+		
 		
 	}
 
