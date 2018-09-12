@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite PP]">
+  <test thread-count="5" name="Teste PP(failed)">
+    <classes>
+      <class name="PPRegressionTests.dao.DataBaseTesting">
+        <methods>
+          <include name="consultaRgCpfBancoDeDados"/>
+          <include name="setupClass"/>
+          <include name="getData"/>
+          <include name="setUp"/>
+          <include name="teardown"/>
+        </methods>
+      </class> <!-- PPRegressionTests.dao.DataBaseTesting -->
+    </classes>
+  </test> <!-- Teste PP(failed) -->
+</suite> <!-- Failed suite [Suite PP] -->

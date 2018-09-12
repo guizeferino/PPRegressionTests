@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite PP">
+	<test name = "Teste PP">
+	<classes>
+			<class name = "PPRegressionTests.dao.DataBaseTesting"></class>
+		</classes>
+	</test>
+</suite>
