@@ -1,4 +1,4 @@
-package PPRegressionTests.testes;
+package PPRegressionTests.tests;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -46,47 +46,10 @@ public class CadastroPessoaTest extends Base{
 		menu.acessaTelaCadastroPessoaFisicaCorretora();
 		consultaPF.cliqueEmAdicionarPessoaFisicaCorretora();
 		cadastraPF.insereDadosPessoaFisicaCorretora();
-		
-		
-		
-		driver.findElement(By.id("abaDadosEnderecos")).click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
-		driver.findElement(By.id("cep")).click();
-		driver.findElement(By.id("cep")).sendKeys("01010-010");
-		driver.findElement(By.id("cep")).sendKeys(Keys.TAB);
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		driver.findElement(By.id("numero")).click();
-		driver.findElement(By.id("numero")).sendKeys("130");
-		driver.findElement(By.id("numero")).sendKeys(Keys.TAB);
-
-		driver.findElement(By.id("adicionarEndereco")).click();
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		driver.findElement(By.id("salvarPessoa")).click();
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Select dropdownJustificativa = new Select(driver.findElement(By.id("justificativaPadraoDePendencia")));
-		dropdownJustificativa.selectByValue("4");
+//
+//		Select dropdownJustificativa = new Select(driver.findElement(By.id("justificativaPadraoDePendencia")));
+//		dropdownJustificativa.selectByValue("4");
 
 		try {
 			Thread.sleep(5000);

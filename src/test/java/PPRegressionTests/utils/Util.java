@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -150,6 +153,16 @@ public class Util {
 		wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>)e));
 	}
 
+	public void waitUntilElementTobeInvisible(String e, WebDriverWait wait, WebDriver driver){
+		wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(e)));
+	}
+	
+	public void scrollTillElement(WebDriver driver,WebElement e) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("javascript:window.scrollBy(" + e.getLocation().x + "," + e.getLocation().y + ")");
+		e.click();
+	}
 	
 	
 }

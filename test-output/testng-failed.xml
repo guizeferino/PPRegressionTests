@@ -3,14 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="PPRegressionTests.testes.CadastroPessoaTest">
+      <class name="PPRegressionTests.tests.CadastroPessoaTest">
         <methods>
-          <include name="returnToHomePage"/>
           <include name="cadastraPessoaFisicaCorretora"/>
+          <include name="returnToHomePage"/>
           <include name="setUp"/>
           <include name="teardown"/>
         </methods>
-      </class> <!-- PPRegressionTests.testes.CadastroPessoaTest -->
+      </class> <!-- PPRegressionTests.tests.CadastroPessoaTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
