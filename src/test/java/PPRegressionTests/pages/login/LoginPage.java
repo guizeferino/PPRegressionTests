@@ -1,4 +1,4 @@
-package PPRegressionTests.pages;
+package PPRegressionTests.pages.login;
 
 import java.util.Properties;
 

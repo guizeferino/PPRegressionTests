@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import PPRegressionTests.base.Base;
-import PPRegressionTests.pages.HomePage;
-import PPRegressionTests.pages.LoginPage;
-import PPRegressionTests.pages.MenusPage;
+import PPRegressionTests.pages.home.HomePage;
+import PPRegressionTests.pages.login.LoginPage;
+import PPRegressionTests.pages.menu.MenusPage;
 import PPRegressionTests.pages.pessoa.CadastroPessoaFisicaCorretoraPage;
 import PPRegressionTests.pages.pessoa.ConsultaPessoaFisicaCorretoraPage;
 import PPRegressionTests.utils.Util;

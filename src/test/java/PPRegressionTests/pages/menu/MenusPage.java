@@ -1,4 +1,4 @@
-package PPRegressionTests.pages;
+package PPRegressionTests.pages.menu;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
